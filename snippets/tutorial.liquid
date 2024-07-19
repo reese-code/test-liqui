@@ -1,4 +1,5 @@
-{% assign string = 'hello world' %}
+{% assign myVariable = 21%}
 
-<h1>{{string}}</h1>
-{% comment %} wow look a comment {% endcomment %}
+{% if myVariable > 20 %}
+    <p>Variable greater than 20</p>
+{% endif %}
