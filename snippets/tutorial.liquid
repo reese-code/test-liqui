@@ -1,7 +1,28 @@
-{% assign myVariable = 32 %}
+{% comment %}
+Fetch and parse JSON data from an external file
+{% endcomment %}
 
-{% if myVariable > 20 %}
-    <p>Variable greater than 20</p>
-{% endif %}
+{% assign json_url = 'learning.json' %}
 
-<p>Variable is {{ myVariable }}</p>
+{% capture json_data %}
+{{ json_url | file_url | fetch }}
+{% endcapture %}
+
+{% assign parsed_data = json_data | parse_json %}
+
+{% comment %}
+Include the JSON parser snippet
+{% endcomment %}
+
+{% include 'json-parser' %}
+
+{% comment %}
+Use the parsed JSON data to set the background image and the title text
+{% endcomment %}
+
+<div style="background-image: url('{{ parsed_data.background_url }}'); padding: 50px; text-align: center;">
+  <h1>{{ parsed_data.title }}</h1>
+</div>
+
+
+
